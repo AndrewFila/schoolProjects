@@ -1,8 +1,8 @@
 raytracer: raytracer.o
-	gcc -g -Wall -std=gnu99 raytracer.o -o ray1 -lm
+	gcc -g -Wall -Wextra -std=gnu99 raytracer.o -o ray2 -lm
 
 raytracer.o: raytracer.c
 	gcc -std=gnu99 -c raytracer.c
 
 clean:
-	rm *.o *.png
+	rm *.o *.png ray2
