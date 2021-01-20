@@ -1,0 +1,15 @@
+trlen(w))): buffer[i] = 0
+will set the last character 
+of the current buffer to zero. What this 
+does is it gets rid of the last \n we read, so we can
+print it nicely with puts. 
+The bit I suggested in the comments is the use of strncmp. This fu
+nction is just like strcmp, but it will only comp
+are at most a defined number of bytes. So, with this funct
+ion, you can effectively determine if a string starts with the s
+ubstring you're looking for. If this strin
+g is found, we print the line in which it i
+s, print the buffer itself and increment n, 
+which is our counter on how many times w was 
+found. You should have declared int n = 0; 
+in the beginning of the code...
