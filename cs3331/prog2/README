@@ -1,0 +1,29 @@
+1. the logic is as follows:
+    1 -- collect the relevant information from the input file (i.e. array size and
+         the array itself)
+    2 -- create shared memory sections for merge and qsort separately
+         (Note. I believe i could have done these as 1 but this made more sense
+         to me)
+    3 -- attach shared memory sections
+    4 -- assign the arrays to there respective positions in the shared memory
+    5 -- create new child processes 1st qsort then merge sort.
+    6 -- wait for the completion of merge and qsort then detach and remove the
+         shared memory sections
+
+2. This program doesn't really work but, the goal was that by using shared memory
+  i would add an array to the shared memory then i could use a separate process to
+  sort the array either quick sort or merge sort. The part that i ran into an
+  issue is in the execvp() command. As you can see by running my program the error
+  bad argument is returned meaning that i was unable to pass the arguments to
+  merge.c properly, the arguments i tried to pass were the argv[0] and the value
+  of shm_id as a char * (I also tried int but was unable to get that to work).
+  After this i would have simply attached the shared memory to merge and use that
+  as an array for merge sort or quick sort. I am however able to create, attach,
+  detach, and remove shared memory segments successfully.
+
+3. I allocated 2 memory segment the first being for qsort which was the size of
+   the 'a' array the second being the size of x + y arrays.
+4. As i used 2 separate memory sections I don't believe that there is any race
+   conditions.
+5. This was my problem
+6. Same as 5

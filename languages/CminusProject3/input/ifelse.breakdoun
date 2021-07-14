@@ -1,0 +1,64 @@
+<Header> -> <INCLUDE> <HEADERSTRING>
+<Headers> -> <Header>
+<Type> -> <INTEGER>
+<VarDecl> -> <IDENTIFIER
+<IdentifierList> -> <VarDecl>
+<DeclList> -> <Type> <IdentifierList> <SC>
+<Type> -> <INTEGER>
+<FunctionDecl> ->  <Type> <IDENTIFIER> <LP> <RP> <LBR>
+<ProcedureHead> -> <FunctionDecl>
+<StringConstant> -> <STRING>
+<IOStatement> -> <WRITE> <LP> <StringConstant> <RP> <SC>
+<Statement> -> <IOStatement>
+<StatementList> -> <Statement>
+<Variable> -> <IDENTIFIER>
+<IOStatement> -> <READ> <LP> <STRING> <COMMA> <ADDR> <Variable> <RP> <SC>
+<Statement> -> <IOStatement>
+<StatementList> -> <StatementList> <Statement>
+<Variable> -> <IDENTIFIER>
+<Factor> -> <Variable>
+<MulExpr> -> <Factor>
+<AddExpr> -> <MulExpr>
+<SimpleExpr> -> <AddExpr>
+<Expr> -> <SimpleExpr>
+<Test> -> <LP> <Expr> <RP>
+<Variable> -> <IDENTIFIER>
+<Factor> -> <Variable>
+<MulExpr> -> <Factor>
+<AddExpr> -> <MulExpr>
+<SimpleExpr> -> <AddExpr>
+<Expr> -> <SimpleExpr>
+<IOStatement> -> <WRITE> <LP> <STRING> <COMMA> <Expr> <RP> <SC>
+<Statement> -> <IOStatement>
+<StatementList> -> <Statement>
+<CompoundStatement> -> <LBR> <StatementList> <RBR>
+
+
+
+<TestAndThen> -> <Test> <CompoundStatement>
+<Variable> -> <IDENTIFIER>
+<Factor> -> <Variable>
+<MulExpr> -> <Factor>
+<AddExpr> -> <MulExpr>
+<SimpleExpr> -> <AddExpr>
+<Expr> -> <SimpleExpr>
+<IOStatement> -> <WRITE> <LP> <STRING> <COMMA> <Expr> <RP> <SC>
+<Statement> -> <IOStatement>
+<StatementList> -> <Statement>
+<CompoundStatement> -> <LBR> <StatementList> <RBR>
+<IfStatement> -> <IF> <TestAndThen> <ELSE> <CompoundStatement>
+<Statement> -> <IfStatement>
+
+
+
+<StatementList> -> <StatementList> <Statement>
+<StringConstant> -> <STRING>
+<IOStatement> -> <WRITE> <LP> <StringConstant> <RP> <SC>
+<Statement> -> <IOStatement>
+<StatementList> -> <StatementList> <Statement>
+<ProcedureBody> -> <StatementList> <RBR>
+<ProcedureDecl> -> <ProcedureHead> <ProcedureBody>
+<Procedures> -> epsilon
+<Procedures> -> <ProcedureDecl> <Procedures>
+<Program> -> <DeclList> <Procedures>
+<Program> -> <Headers> <Programbody>
