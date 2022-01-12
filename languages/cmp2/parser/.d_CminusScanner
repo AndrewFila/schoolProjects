@@ -1,2 +1,0 @@
-libparser-g.a(CminusScanner.o): CminusScanner.c CminusParser.h \
- ../util/string_utils.h ../util/general.h

@@ -1,1 +1,0 @@
-libparser-g.a(emiter.o): emiter.c emiter.h ext_utils.h

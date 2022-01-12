@@ -1,1 +1,0 @@
-libparser-g.a(ext_utils.o): ext_utils.c ext_utils.h
