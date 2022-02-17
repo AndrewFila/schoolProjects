@@ -1,0 +1,69 @@
+1. The logic of your program
+    the program really starts with the MasterThread which begins by sending
+    numbers 2-n through a chanel to the PrimeThread P2 which holds 2 as a value.
+    Then the prime threads starting with P2 check to see if the current input
+    number is divisibile by their stored number, if it is its not prime. if
+    it isnt divisible by the stored number in, lets say, P2 then, that thread
+    (P2) passes it to the thread holding the next bigest prime (P3). If P3
+    doesnt exist then we create a new thread and pass the number to it.
+
+2. Why does your program work?
+    This program works because it is able to 'quickly' check the primality of
+    a number and only save the inportant numbers. it successivly checks each
+    number causing the finaly array to be sorted from least to greatest.
+    The way in which the numbers are checked ensure that they are prime.
+
+
+3. The meaning, inital value and the use of each variable. Explain why their
+inital values and uses are correct. Justify your claim.
+    -MasterThread::ThreadFunc
+        - int i - iterator to send numbers to the threads
+        - int END - defines the end signal -1.
+        - int i - iterator for while loop to print primes array
+        - int Max/max - the max number to test for primality, inputed by user
+    -PrimeThread::ThreadFunc
+        - int nextPrime - stores the next prime in list i.e. 2 stores 3, 3
+        stores 5
+        - int number - the current number to be evaluated for primality
+        - int index - the index of the prime saved by the thread in the primes
+          array
+        - int threadID - the id of the thread
+        - int primeID - the prime stored in the thread
+        - PrimeThread next - the threads successor
+        - SynOneToOneChannel channel - channel for communication between a
+          thread and its successor
+    -printSpace
+        - int num - number of spaces to print * 2
+
+4. Anser the following:
+    a. Can we use asynchronous channels to sove this problem? If you say yes,
+    prove it with a convincing argument. If you say no show a counter example.
+        -Yes It would be very similar with the only issue being that some mutual
+        exclusion may be nessesary to ensure that the primes array is filled
+        coorectly and primes arent missed. while it may be possible it seems
+        that synchronous may be better for this application.
+    b. if the last thread in the chain reveives a number larget than the one
+    this thread memorized, then the incoming number must be a prime number.
+    Why is this true? Prove this fact with a convincing argument.
+        -THe definiition of a prime number is any number greater than 1 that
+        can not be written as a product of two smaller natural numbers.
+        since the number in question is not divisible by any of the primes
+        that it has been checked against there is not combanation of natural
+        number which can produce this number other than 1 and itself.
+    c. Explain how you can fill the array Primes elemtnts in a consecutive way.
+        -The primes array will only be accessed when a new thread is created and
+        receives its value, since each thread has an index variable the array
+        will be filled in the order of thread creation, that is, consecutivly.
+    d. You do not need a mutex to protect the global array Primes when a rpime
+    thread is saving its memorized prime number? Prove this with a convincing
+    argument.
+        -at any point in the execution of the program only one thread at a time
+        will be able to modify the primes array. This is because the only time
+        a thread is able to modify the array is when it has not yet saved a value.
+
+5. you must terminate your prgram gracefully. More precisely, The last three
+output lines must be printed by master.
+    -This will always happen because Join is called on P2 in the master thread
+    before it outputs the array. Since P2 will be the last to terminate all
+    threads will have terminated before printing and therefore, all primes
+    will be in the array.

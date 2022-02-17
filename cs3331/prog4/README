@@ -1,0 +1,16 @@
+1. How did you make sure htat no students can enter while the landlord is in
+the room and checking? Explain your approach in detail.
+    - I used a semaphore EnterRoom and ExitRoom and made them wait when the
+    landlord entered the room and signal when he left
+
+
+2. How did you make sure that the landlord will not leave until all students
+have left the room? Explain your approach in detail.
+    - I wasn't able to figure this out I tried using another semaphore but
+    was unsucessfull
+
+3. How did you make sure the message "After checking the room XX times, the
+landlord retires and is on vacation!" is the last message printed by your
+program?
+    - I just made that print out in thread.cpp which caused it to print
+    twards the end but nog garuented at the end. I was unable to solve this issue.

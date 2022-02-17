@@ -1,0 +1,41 @@
+1. How do you guarantee that only three elves will ask questions?
+- Using the monitor we use blocks which only activate when 3 elves are
+waiting to ask a question.
+
+2. Show that why no elf will leave before the questions are answered.
+- When an elf is waiting they can do nothing other then wait in the
+specified question.Wait() section in the code they will not move forward
+others may join them though.
+
+3. Show that while three elves are waiting for an answer, no other elves
+can cut in and ask questions.
+- The first group of eleves to call wait will have priorety in the monitor
+and when a Signal is called that first waiting group can continue
+
+4. How do you guarantee that Santa only answers questions while he is not
+sleeping.
+- when we call Sleep() we block santa, when an elf has a question or when the
+reindeer return they will call Signal to unblock them.
+
+5. Show that when Santa is wakened up by a reindeer, this reindeer is the
+last one coming back from vaction.
+- using an if ... else statement with blocking we wait untill a counter is
+equal to the number of reindeer when that inital if(count == reindeer)
+is activated only the thread that entered will call signal to wake up santa.
+
+6. How do you make sure that Santa always handles reindeers first.
+- when santa becomes unblocked (wakes up) we first check if all reindeer are
+gathered then we check the questions so if all reindeer are gathered the flow
+of the code will land us on the if(reindeerBack) before we look at if(question)
+for the elves.
+
+7. Show that while Santa is attaching the sleigh and delivering toys, all
+reindeers are there. They won't sneak out for vacation.
+- Reindeers will be blocked while waiting to be attached to the sleigh only
+to be released when the last reindeer is hooked up. after delivering toys
+reindeer are completely unblocked and may begin their while loop again.
+
+8. Show that while santa is attaching the sleigh and delivering toys, elves
+will not ask questions.
+- If santa is attaching the sleigh we will have all the elves be blocked only
+to be released when santa returns and Signals.

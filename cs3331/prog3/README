@@ -1,0 +1,21 @@
+1.
+    There may be race conditions if the threads are not kept in order which
+    could change the outcome of the sort however, using the Join() we are able
+    to prevent this and make sure there are no race conditions
+2.
+
+3.
+    if we were to allow an even and odd pass to occur at the same time it could
+    create a race condition where each takes x[k] and swaps them resulting in
+    x[k] x[k-1]or x[k+1] x[k] in order to prevent this we must make sure that
+    the second operation (ODD) is done once the first operation (EVEN) either
+    swaps or does nothing after this happens we would allow the odd pass to
+    compare and swap if nessesary. A soloution to this would be to use flags
+    to indicate which turn it is at the end of the operation we will flip the
+    flag sinaling the next operation to continue with its coparison.
+
+4.
+    If we were to creat n/2 threads at the begining we may run into race
+    conditions. If we were to use a flag as mentioned in the above question
+    this may solve this problem.
+
